@@ -80,18 +80,20 @@ const SignInForm  = () => {
                 <FormInput 
                     label="Email"
                     type="email" 
-                    required 
+                    required={true}
                     onChange={handleChange} 
                     name="email"
-                    value={email}></FormInput>
+                    value={email}>
+                </FormInput>
 
                 <FormInput 
-                l   label="Password"
+                    label="Password"
                     type="password" 
-                    required 
+                    required={true}
                     onChange={handleChange} 
                     name="password"
-                    value={password}></FormInput>
+                    value={password}>
+                </FormInput>
 
                 <div className='buttons-container'>
                     <Button type="submit">Sign In</Button>
