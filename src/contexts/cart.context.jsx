@@ -42,7 +42,7 @@ const getCartItem = (cartItems, product, index) => {
 } */
 
 
-const removeCartItem = (cartItems,  index) => {
+/* const removeCartItem = (cartItems,  index) => {
     console.log('remove cart item');
     let rkm = [];
 
@@ -50,6 +50,39 @@ const removeCartItem = (cartItems,  index) => {
         rkm = cartItems.splice(index, 1);
 
     return rkm;
+} */
+
+
+const removeCartItem = (cartItems, productToRemove) => {
+    
+    const existingCartItem = cartItems.find( (elem) => {
+        return elem.id == productToRemove.id;
+    }); 
+
+    if ( existingCartItem.quantity == 1 ) {
+        return cartItems.filter( (cartItem) => cartItem.id  != productToRemove.id);
+    }
+
+
+    if( existingCartItem != null ) {
+        return cartItems.map( (elem) => {
+            let rtn = elem.id == existingCartItem.id ? {
+                ...existingCartItem,
+                 key: existingCartItem.id, 
+                 quantity: existingCartItem.quantity == 0 ? 0 : existingCartItem.quantity - 1,
+            } : elem;
+
+            return rtn;
+        })
+    }
+    else {
+        return cartItems;
+    }
+
+        // return new array with modified cart items
+/*         let item = [...cartItems, {...productToRemove, quantity: 1}];
+        return item; */
+
 }
 
 
@@ -147,8 +180,8 @@ export const CartProvider = ({children}) => {
         return count;
     }
 
-    const removeCartItem = (bob, index) => {
-        console.log(bob);
+/*     const removeCartItem = (cartItems, index) => {
+        console.log( cartItems );
         console.log(index);
         let quantity = cartItems[index].quantity;
         let rkm = cartItems.splice(index, 1);
@@ -156,10 +189,10 @@ export const CartProvider = ({children}) => {
         console.log(cartItems);
         setCartItemCount( cartItemCount == 0 ? 0 : cartItemCount - quantity );
         setCartItems( cartItems );
-/*         setCartItems(
-            cartItems.splice(index, index)
-        ); */
-    }
+        // setCartItems(
+        //     cartItems.splice(index, index)
+        // );
+    } */
 
     const incrementItemCount = (index) => {
 
